@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Rocket : MonoBehaviour
+{
+    public float rotatespeed;
+    public GameObject player;
+    public Rigidbody2D playerrigid;
+
+    void Update()
+    {
+        Vector2 direc = player.transform.position - transform.position;
+
+        float angle = Mathf.Atan2(direc.y,direc.x) * Mathf.Rad2Deg;
+
+        if (transform.rotation.z != angle-90)
+        {
+            transform.rotation = Quaternion.Euler(0,0,1);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0,0,-1);
+        }
+    }
+}
