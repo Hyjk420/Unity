@@ -1,0 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class rockFunc : MonoBehaviour
+{
+    public GameObject dummy, stone;
+    float timer;
+    void Start()
+    {
+        dummy = GameObject.Find("dummy").gameObject;
+    }
+    void Update()
+    {
+        Vector2 stone = this.transform.position;
+        Vector2 dum = dummy.transform.position;
+
+        float posX = stone.x - dum.x;
+        float posY = stone.y - dum.y;
+
+        float Long = Mathf.Sqrt((posX*posX) + (posY*posY));
+
+        timer += Time.deltaTime;
+        if (timer >= 0.01f)
+        {
+            this.transform.position += new Vector3(-posX/100, -posY/100);
+            timer = 0;
+        }
+        
+    }
+}
