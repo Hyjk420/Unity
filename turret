@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class turretFunc : MonoBehaviour
+{
+    public Rigidbody2D turretrb;
+    Vector3 worldPos;
+    public GameObject bullet;
+    void Update()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = Camera.main.nearClipPlane;
+        worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        Vector3 direc = worldPos - transform.position;
+        direc.Normalize();
+
+        float rotateAmount = Vector3.Cross(direc, transform.up).z;
+        turretrb.angularVelocity = -1000 * rotateAmount;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(bullet,this.transform.position += new Vector3(0.5f,0),transform.rotation);
+        }
+    }
+}
