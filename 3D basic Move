@@ -1,0 +1,10 @@
+float moveX;
+    float moveY;
+    float speed = 3;
+    void Update()
+    {
+        moveX = Input.GetAxis("Horizontal");
+        moveY = Input.GetAxis("Vertical");
+
+        gameObject.transform.position += new Vector3(moveX*speed*Time.deltaTime,moveY*speed*Time.deltaTime,0);
+    }
