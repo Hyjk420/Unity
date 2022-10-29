@@ -1,0 +1,61 @@
+bool YEntered,XEntered;
+    void Update()
+    {
+        Debug.Log("Y軸"+YEntered);
+        Debug.Log("X軸"+XEntered);
+        
+        var PosX = move.cubePos.x;
+        var PosY = move.cubePos.y;
+        var MePosX = gameObject.transform.position.x;
+        var MePosY = gameObject.transform.position.y;
+
+        if (MePosY + 0.5f > PosY -0.5f && PosY + 0.5f > MePosY - 0.5f && !XEntered) //偵測Y軸重疊
+        {
+            YEntered = true; 
+            if (PosX>MePosX)//從右方推
+            {
+                if (MePosX + 1 > PosX)
+                {
+                    var a = 0.02f;
+                    gameObject.transform.position -= new Vector3(a,0,0);
+                }
+            }
+            if (PosX<MePosX) //從左方推
+            {
+                if (MePosX - 1 < PosX)
+                {
+                    var a = -0.02f;
+                    gameObject.transform.position -= new Vector3(a,0,0);
+                }
+            }
+        }
+        else
+        {
+            YEntered = false;
+        }
+        if (MePosX + 0.5f > PosX -0.5f && PosX + 0.5f > MePosX - 0.5f && !YEntered) //偵測X軸重疊
+        {
+            XEntered = true;
+            if (PosY>MePosY)//從上方推
+            {
+                if (MePosY + 1 > PosY)
+                {
+                    var a = 0.02f;
+                    gameObject.transform.position -= new Vector3(0,a,0);
+                }
+            }
+            if (PosY<MePosY) //從下方推
+            {
+                if (MePosY - 1 < PosY)
+                {
+                    var a = -0.02f;
+                    gameObject.transform.position -= new Vector3(0,a,0);
+                }
+            }
+        }
+        else
+        {
+            XEntered = false;
+        }
+        
+    }
