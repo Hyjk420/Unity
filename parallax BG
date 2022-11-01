@@ -1,0 +1,49 @@
+public bool IsInfiniteX, IsInfiniteY;
+
+    Transform camTransfrom; //主鏡頭
+    Vector3 LastCamPos; 
+
+    float textureUnitSizeX, textureUnitSizeY;
+
+    public Vector2 parallaxMutiplier;
+
+    void Start() 
+    {
+        camTransfrom = Camera.main.transform;
+        LastCamPos = camTransfrom.position;
+
+        Sprite sprite = GetComponent<SpriteRenderer>().sprite;
+        Texture2D texture2D = sprite.texture;
+
+        textureUnitSizeX = texture2D.width / sprite.pixelsPerUnit;
+        textureUnitSizeY = texture2D.height / sprite.pixelsPerUnit;
+    }
+
+    void LateUpdate()
+    {
+        Vector3 deltaMovement = camTransfrom.position - LastCamPos;
+
+        transform.position += new Vector3(deltaMovement.x*parallaxMutiplier.x, deltaMovement.y*parallaxMutiplier.y);
+
+        LastCamPos = camTransfrom.position;
+
+        if (IsInfiniteX)
+        {
+             if (Mathf.Abs(camTransfrom.position.x - transform.position.x) >= textureUnitSizeX)
+             {
+                float offsetPosX = (camTransfrom.position.x - transform.position.x) % textureUnitSizeX;
+
+                transform.position = new Vector3(camTransfrom.position.x - offsetPosX, transform.position.y);
+             }
+        }
+
+        if (IsInfiniteY)
+        {
+             if (Mathf.Abs(camTransfrom.position.y - transform.position.y) >= textureUnitSizeY)
+             {
+                float offsetPosY = (camTransfrom.position.y - transform.position.y) % textureUnitSizeY;
+
+                transform.position = new Vector3(transform.position.x, camTransfrom.position.y - offsetPosY);
+             }
+        }
+    }
