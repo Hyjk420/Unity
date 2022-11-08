@@ -1,0 +1,34 @@
+[Range(1,100)]
+    public float Speed = 1;
+    void Update()
+    {
+        //AxisInputMove();
+        GetKeyMove();
+    }
+
+    void AxisInputMove()
+    {
+        float MoveX = Input.GetAxis("Horizontal");
+        float MoveY = Input.GetAxis("Vertical");
+
+        transform.position += new Vector3(MoveX * Speed * Time.deltaTime,MoveY * Speed * Time.deltaTime);
+    }
+    void GetKeyMove()
+    {
+        if (Input.GetKey(KeyCode.A)) //左
+        {
+            transform.position += new Vector3(-1 * Speed * Time.deltaTime,0);
+        }
+        if (Input.GetKey(KeyCode.D)) //右
+        {
+            transform.position += new Vector3(1 * Speed * Time.deltaTime,0);
+        }
+        if (Input.GetKey(KeyCode.W)) //上
+        {
+            transform.position += new Vector3(0,1 * Speed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.S)) //下
+        {
+            transform.position += new Vector3(0,-1 * Speed * Time.deltaTime);
+        }
+    }
