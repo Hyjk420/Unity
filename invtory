@@ -1,0 +1,42 @@
+public int[,] InvSlot = new int[8,3]; //[x,y] x:物品欄位置, y:物品ID int[x,y]:物品數量
+    private int ItemID;
+    public GameObject[] InvSlotObj; //物品欄obj
+    public Sprite[] Item = new Sprite[3]; //物品圖片
+
+
+    void Start() 
+    {
+        InvSlotObj = new GameObject[InvSlot.GetLength(0)];
+
+         for (int i = 0; i < InvSlot.GetLength(0); i++)
+         {
+            InvSlotObj[i] = transform.GetChild(i).gameObject;
+         }
+    }
+
+    public void itemSave(int itemID)
+    {
+        ItemID = itemID;
+        for (int h = 0; h < 2; h++) //第一次檢查是否有重複物品，若無則尋找最近的空格子放置
+        {
+            for (int i =0; i < InvSlot.GetLength(0);i++) //尋找物品欄所有格子
+            {
+                for (int j = 0; j < InvSlot.GetLength(1); j++) //尋找格子是否有物品/是否為相同物品
+                {
+                    if (j == ItemID && InvSlot[i,j] > 0 && h == 0) // 若搜索之J物品等於拾取物品 & I格J物品有東西 (第一次搜尋)
+                    {
+                        // 放入物品
+                        goto outer;
+                    }
+
+                    if (j == ItemID && InvSlot[i,j] == 0 && h == 1) //尋找空格子並放置 (第二次搜尋)
+                    {
+                        // 放入物品
+                        goto outer;
+                    }
+                }
+            }
+        }
+        outer:;
+        Debug.Log("物品已放置");
+    }
