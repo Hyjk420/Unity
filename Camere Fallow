@@ -1,0 +1,10 @@
+public Transform Player;
+    Vector3 offset;
+    void Start()
+    {
+        //offset = Player.position - this.transform.position;
+    }
+    void Update()
+    {
+        this.transform.position = new Vector3(Player.position.x,Player.position.y,this.transform.position.z);
+    }
