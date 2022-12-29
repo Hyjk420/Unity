@@ -1,0 +1,1 @@
+EnemySprite.color = Color.Lerp(EnemySprite.color, Color.clear, Time.deltaTime*3);
