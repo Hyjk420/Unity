@@ -1,0 +1,17 @@
+public AnimationCurve ShootCurve;
+    float ShootcurveTime = 0f; 
+    float ShootcurveAmount;
+    float ShootlastCurve;
+
+    void shootCurveFunc()
+    {
+        ShootcurveTime +=Time.deltaTime;
+
+        ShootcurveAmount = ShootCurve.Evaluate (ShootcurveTime);  
+
+        if (ShootcurveTime >= 0.5f)
+        ShootcurveTime = 0;
+        
+        //Curve code here...
+        ShootlastCurve = ShootcurveAmount;
+    }
