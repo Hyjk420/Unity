@@ -1,0 +1,17 @@
+foreach(Transform dotPos in usingTrans)
+            {
+                float dirPos = Vector3.Distance(curPos, dotPos.position); //目前鼠標與點的距離
+                if (LastDirPos != 1000) //第二個點以後
+                {
+                    if (LastDirPos > dirPos) //如果目前距離小於上一個距離(更換目標)
+                    {
+                        NearDotPos = dotPos.position;
+                        LastDirPos = dirPos;
+                    }
+                }else //第一個點執行
+                {
+                    NearDotPos = dotPos.position;
+                    LastDirPos = dirPos;
+                }
+            }
+            transform.position = NearDotPos;
